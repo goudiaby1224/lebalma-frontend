@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "lebalma-frontend"
+  "defaultProject": "lebalma-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
