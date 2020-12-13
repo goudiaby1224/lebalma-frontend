@@ -1,4 +1,4 @@
-export class User {
+export class Entreprise {
   public id: number;
   public login: string;
   public password: string;
@@ -11,7 +11,7 @@ export class User {
     this.login = login;
     this.password = password;
     this.numero = numero;
-    this.nom = role;
+    this.nom = nom;
     this.role = nom;
   }
 }
