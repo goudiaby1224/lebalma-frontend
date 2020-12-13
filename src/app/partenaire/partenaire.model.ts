@@ -1,17 +1,20 @@
 export class Partenaire {
   public id: number;
-  public login: string;
-  public password: string;
-  public numero: number;
-  public nom: string;
-  public role: string;
+  public raisonsocial: string;
+  public adresse: string;
+  public telephone: number;
+  public mail: string;
+  public dateMiseEnService: string;
+  public type: string;
 
-  constructor(id: number, login: string, password: string, numero: number, nom: string, role: string) {
+  constructor(id: number, raisonsocial: string, adresse: string, telephone: number, mail: string, dateMiseEnService: string
+          ,   type: string) {
     this.id = id;
-    this.login = login;
-    this.password = password;
-    this.numero = numero;
-    this.nom = nom;
-    this.role = nom;
+    this.raisonsocial = raisonsocial;
+    this.adresse = adresse;
+    this.telephone = telephone;
+    this.mail = mail;
+    this.dateMiseEnService = dateMiseEnService;
+    this.type = type;
   }
 }
