@@ -8,13 +8,7 @@ import { PartenaireComponent } from './partenaire/partenaire.component';
 import { AdresseComponent } from './adresse/adresse.component';
 import { PersonnelComponent } from './personnel/personnel.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import { DefaultModule } from './layouts/default/default.module';
-
-
-
-
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,15 +18,12 @@ import { DefaultModule } from './layouts/default/default.module';
     AdresseComponent,
     PersonnelComponent,
     EntrepriseComponent
- 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-   DefaultModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

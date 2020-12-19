@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { Partenaire } from './partenaire.model';
 import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {PartenaireService} from './partenaire.service';
 
 @Component({
   selector: 'app-partenaire',
@@ -9,38 +11,33 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./partenaire.component.css']
 })
 export class PartenaireComponent implements OnInit {
-  //@ViewChild('raisonSocialInput', { static: false }) raisonSocialInputRef: ElementRef;
-  //@ViewChild('adresseInput', { static: false }) adresseInputRef: ElementRef;
-  partenaireCreated = new EventEmitter<Partenaire>();
-  constructor(private http: HttpClient) { }
+  loadedPartenaire: Partenaire[] = [];
+  isFetching = false;
+  error: string | undefined;
+  private errorSub: Subscription | undefined;
+
+  constructor(private http: HttpClient, private partenaireService: PartenaireService) { }
 
   ngOnInit(): void {
+    this.errorSub = this.partenaireService.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
   }
 
-  onCreate(partenaire: any): void {
-      this.partenaireCreated.emit(partenaire);
+  onCreate(partenaire: Partenaire): void {
       this.http.post('http://localhost:8881/users', partenaire).subscribe(responseData => {
         console.log(responseData);
       });
+    // tslint:disable-next-line:max-line-length
+      this.partenaireService.createAndStorePartenaire(partenaire.raisonsocial, partenaire.adresse, partenaire.telephone, partenaire.mail,
+        partenaire.dateMiseEnService, partenaire.type);
   }
 
-  getPartenaire(idPartenaire: string): void {
-    this.http.get<{ [key: string]: Partenaire }>('http://localhost:8881/partenaires/id')
-      .pipe(
-        map(responseDataResponse  => {
-         console.log(responseDataResponse);
-         const postArray: Partenaire[] = [];
-         for (const key in responseDataResponse) {
-           if (responseDataResponse.hasOwnProperty(key)){
-             //postArray.push(responseDataResponse[key], id: key );
-           }
-         }
-         return postArray;
-      })
-      )
-      .subscribe(responseData => {
-       console.log(responseData);
-      });
+  onFetchPartenaire(): void {
+    // tslint:disable-next-line:label-position
+    var id: string = '1';
+    this.isFetching = true;
+    this.partenaireService.fetchPartenaire(id);
   }
 
 }

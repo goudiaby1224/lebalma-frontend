@@ -1,32 +1,35 @@
 <p>partenaire works!</p>
-
+<div class="container">
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form #postForm="ngForm" (ngSubmit)="onCreate(postForm.value)">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="raisonSocial">Raison Social</label>
           <input
             type="text"
-            id="raisonSocial"
             class="form-control"
-            #raisonSocialInput>
+            id="raisonSocial"
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="adresse">Adresse</label>
           <input
-            type="number"
-            id="adresse"
+            type="text"
             class="form-control"
-            #adresseInput>
+            id="adresse"
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="telephone">Telephone</label>
           <input
-            type="number"
-            id="telephone"
+            type="text"
             class="form-control"
-            #telephoneInput>
+            id="telephone"
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="responsable">Responsable</label>
@@ -34,7 +37,8 @@
             type="number"
             id="responsable"
             class="form-control"
-            #responsableInput>
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="mail">Mail</label>
@@ -42,7 +46,8 @@
             type="number"
             id="mail"
             class="form-control"
-            #mailInput>
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="dateMisenEnService">Date de mise en service</label>
@@ -50,7 +55,8 @@
             type="number"
             id="dateMisenEnService"
             class="form-control"
-            #dateMisenEnServiceInput>
+            required
+            ngModel>
         </div>
         <div class="col-sm-2 form-group">
           <label for="type">Type</label>
@@ -58,12 +64,12 @@
             type="number"
             id="type"
             class="form-control"
-            #dateMisenEnServiceInput>
+            required
+            ngModel>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" (click)="onCreate($event)">Add</button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>
@@ -71,3 +77,37 @@
     </form>
   </div>
 </div>
+<hr />
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <button class="btn btn-primary" (click)="onFetchPartenaire()">
+        Fetch Posts
+      </button>
+      |
+      <button
+        class="btn btn-danger"
+        [disabled]="loadedPartenaire.length < 1"
+      >
+        Clear Posts
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <p *ngIf="loadedPartenaire.length < 1 && !isFetching">No posts available!</p>
+      <ul class="list-group" *ngIf="loadedPartenaire.length >= 1 && !isFetching">
+        <li class="list-group-item" *ngFor="let partenaire of loadedPartenaire">
+          <h3>{{ partenaire.raisonsocial }}</h3>
+          <p>{{ partenaire.adresse }}</p>
+        </li>
+      </ul>
+      <p *ngIf="isFetching && !error">Loading...</p>
+      <div class="alert alert-danger" *ngIf="error">
+        <h1>An Error Occurred!</h1>
+        <p>{{ error }}</p>
+        <button class="btn btn-danger">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
