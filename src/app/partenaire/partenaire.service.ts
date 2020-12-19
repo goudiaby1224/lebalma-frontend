@@ -8,7 +8,7 @@ import {map, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartenaireService {
-  BASE_URI = 'http://localhost:8881/partenaires/';
+  BASE_URI = 'http://localhost:8881/lebalma/partenaires/';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) { }
