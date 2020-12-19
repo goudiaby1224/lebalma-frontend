@@ -8,6 +8,7 @@ import { PartenaireComponent } from './partenaire/partenaire.component';
 import { AdresseComponent } from './adresse/adresse.component';
 import { PersonnelComponent } from './personnel/personnel.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { EntrepriseComponent } from './entreprise/entreprise.component';
     PersonnelComponent,
     EntrepriseComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
