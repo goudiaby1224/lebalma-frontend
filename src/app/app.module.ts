@@ -8,6 +8,13 @@ import { PartenaireComponent } from './partenaire/partenaire.component';
 import { AdresseComponent } from './adresse/adresse.component';
 import { PersonnelComponent } from './personnel/personnel.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import { DefaultModule } from './layouts/default/default.module';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -17,10 +24,14 @@ import { EntrepriseComponent } from './entreprise/entreprise.component';
     AdresseComponent,
     PersonnelComponent,
     EntrepriseComponent
+ 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+   DefaultModule
   ],
   providers: [],
   bootstrap: [AppComponent]
