@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {Personnel} from '../personnel/personnel.model';
@@ -16,13 +16,15 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  // tslint:disable-next-line:contextual-lifecycle
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
   // tslint:disable-next-line:typedef
-  createUser(nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, tel: string, role: string) {
-    const postData: Personnel = {nom, prenom, adresse, metier, service, nomUtilisateur, mail, tel, role};
+  createUser(login: string, password: string, numero: string, nom: string, role: string) {
+    // @ts-ignore
+    const postData: Personnel = {login, password, numero, nom, role};
     this.http.post(
       this.BASE_URI, postData,
       {
