@@ -1,17 +1,20 @@
 export class Entreprise {
-  public id: number;
-  public login: string;
-  public password: string;
-  public numero: number;
-  public nom: string;
-  public role: string;
+  public id?: number;
+  public raisonsocial: string;
+  public adresse: string;
+  public telephone: string;
+  public mail: string;
+  public dateMiseEnService: string;
+  public type: string;
 
-  constructor(id: number, login: string, password: string, numero: number, nom: string, role: string) {
+  constructor(id: number, raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string
+    ,         type: string) {
     this.id = id;
-    this.login = login;
-    this.password = password;
-    this.numero = numero;
-    this.nom = nom;
-    this.role = nom;
+    this.raisonsocial = raisonsocial;
+    this.adresse = adresse;
+    this.telephone = telephone;
+    this.mail = mail;
+    this.dateMiseEnService = dateMiseEnService;
+    this.type = type;
   }
 }

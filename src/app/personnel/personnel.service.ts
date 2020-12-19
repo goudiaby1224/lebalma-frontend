@@ -1,24 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
-import {Partenaire} from '../partenaire/partenaire.model';
+import {Personnel} from './personnel.model';
+import {User} from '../user/user.model';
 import {map, tap} from 'rxjs/operators';
-import {Entreprise} from './entreprise.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntrepriseService {
-
-  BASE_URI = 'http://localhost:8881/lebalma/entreprise/';
+export class PersonnelService {
+  BASE_URI = 'http://localhost:8881/lebalma/partenaire/';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) {
   }
 
+  // tslint:disable-next-line:contextual-lifecycle
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   // tslint:disable-next-line:typedef
-  createAndStoreEntreprise(raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string, type: string) {
-    const postData: Partenaire = {raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
+  createUser(nom: string, prenom: string, adresse: string, metier: string, service: string, mail: string, tel: string, role: string) {
+    // @ts-ignore
+    const postData: Personnel = {nom, prenom, adresse, service, nomUtilisateur, mail, tel: role};
     this.http.post(
       this.BASE_URI, postData,
       {
@@ -36,12 +41,12 @@ export class EntrepriseService {
   }
 
   // tslint:disable-next-line:typedef
-  fetchEntreprise(id: string) {
-    this.http.get<{ [key: string]: Entreprise }>(this.BASE_URI + '/' + id)
+  fetchUser(id: string) {
+    this.http.get<{ [key: string]: User }>(this.BASE_URI + '/' + id)
       .pipe(
         map(responseDataResponse => {
           console.log(responseDataResponse);
-          const postArray: Entreprise[] = [];
+          const postArray: User[] = [];
           for (const key in responseDataResponse) {
             if (responseDataResponse.hasOwnProperty(key)) {
               // postArray.push(responseDataResponse[key], id: key );
@@ -57,7 +62,7 @@ export class EntrepriseService {
 
 
   // tslint:disable-next-line:typedef
-  deleteEntreprise(id: string) {
+  deletePersonnel(id: string) {
     return this.http.delete(this.BASE_URI + '/' + id, {
       observe: 'events',
       responseType: 'text'
