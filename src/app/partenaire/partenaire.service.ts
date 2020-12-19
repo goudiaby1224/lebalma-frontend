@@ -8,10 +8,12 @@ import {map, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartenaireService {
+  BASE_URI = 'http://localhost:8881/partenaires/';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
+  // tslint:disable-next-line:typedef
   createAndStorePartenaire(raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string, type: string){
     const postData: Partenaire = { raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
     this.http.post(
@@ -32,7 +34,7 @@ export class PartenaireService {
 
   // tslint:disable-next-line:typedef
   fetchPartenaire(id: string){
-    this.http.get<{ [key: string]: Partenaire }>('http://localhost:8881/partenaires/{id}')
+    this.http.get<{ [key: string]: Partenaire }>(this.BASE_URI + '/' + id)
       .pipe(
         map(responseDataResponse  => {
           console.log(responseDataResponse);
@@ -53,7 +55,7 @@ export class PartenaireService {
 
   // tslint:disable-next-line:typedef
   deletePartenaire(id: string){
-    return this.http.delete('http://localhost:8881/partenaires/{id}', {
+    return this.http.delete(this.BASE_URI + '/' + id, {
       observe: 'events',
       responseType: 'text'
     }).pipe(
