@@ -29,10 +29,13 @@ export class PartenaireComponent implements OnInit {
         console.log(responseData);
       });
     // tslint:disable-next-line:max-line-length
-      this.partenaireService.createAndStorePartenaire(partenaire.raisonsocial, partenaire.adresse, partenaire.telephone, partenaire.mail, partenaire.dateMiseEnService, partenaire.type);
+      this.partenaireService.createAndStorePartenaire(partenaire.raisonsocial, partenaire.adresse, partenaire.telephone, partenaire.mail,
+        partenaire.dateMiseEnService, partenaire.type);
   }
 
-  onFetchPartenaire(id: string): void {
+  onFetchPartenaire(): void {
+    // tslint:disable-next-line:label-position
+    var id: string = '1';
     this.isFetching = true;
     this.partenaireService.fetchPartenaire(id);
   }
