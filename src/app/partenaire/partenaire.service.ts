@@ -17,7 +17,7 @@ export class PartenaireService {
   createAndStorePartenaire(raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string, type: string){
     const postData: Partenaire = { raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
     this.http.post(
-      'http://localhost:8881/', postData,
+      this.BASE_URI, postData,
       {
         observe: 'response'
       }
