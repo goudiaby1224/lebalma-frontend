@@ -1,5 +1,5 @@
 export class Personnel {
-  public id: number;
+  public id?: number;
   public nom: string;
   public prenom: string;
   public adresse: string;
@@ -10,16 +10,16 @@ export class Personnel {
   public tel: string;
   public role: string;
 
-  constructor(id: number, nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, role: string) {
+  constructor(id: number, nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, tel: string, role: string) {
     this.id = id;
     this.nom = nom;
     this.prenom = prenom;
     this.adresse = adresse;
     this.metier = metier;
     this.service = service;
-    this.nomUtilisateur = service;
+    this.nomUtilisateur = nomUtilisateur;
     this.mail = mail;
-    this.tel = service;
-    this.role = nom;
+    this.tel = tel;
+    this.role = role;
   }
 }
