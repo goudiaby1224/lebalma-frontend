@@ -1,1 +1,73 @@
 <p>partenaire works!</p>
+
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="raisonSocial">Raison Social</label>
+          <input
+            type="text"
+            id="raisonSocial"
+            class="form-control"
+            #raisonSocialInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="adresse">Adresse</label>
+          <input
+            type="number"
+            id="adresse"
+            class="form-control"
+            #adresseInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="telephone">Telephone</label>
+          <input
+            type="number"
+            id="telephone"
+            class="form-control"
+            #telephoneInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="responsable">Responsable</label>
+          <input
+            type="number"
+            id="responsable"
+            class="form-control"
+            #responsableInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="mail">Mail</label>
+          <input
+            type="number"
+            id="mail"
+            class="form-control"
+            #mailInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="dateMisenEnService">Date de mise en service</label>
+          <input
+            type="number"
+            id="dateMisenEnService"
+            class="form-control"
+            #dateMisenEnServiceInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="type">Type</label>
+          <input
+            type="number"
+            id="type"
+            class="form-control"
+            #dateMisenEnServiceInput>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" (click)="onCreate($event)">Add</button>
+          <button class="btn btn-danger" type="button">Delete</button>
+          <button class="btn btn-primary" type="button">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
