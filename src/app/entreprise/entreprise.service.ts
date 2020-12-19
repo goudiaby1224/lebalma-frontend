@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
-import {Partenaire} from '../partenaire/partenaire.model';
 import {map, tap} from 'rxjs/operators';
 import {Entreprise} from './entreprise.model';
 
@@ -18,7 +17,7 @@ export class EntrepriseService {
 
   // tslint:disable-next-line:typedef
   createAndStoreEntreprise(raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string, type: string) {
-    const postData: Partenaire = {raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
+    const postData: Entreprise = {raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
     this.http.post(
       this.BASE_URI, postData,
       {

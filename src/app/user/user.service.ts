@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
-import {Personnel} from '../personnel/personnel.model';
 import {map, tap} from 'rxjs/operators';
 import {User} from './user.model';
 
@@ -24,7 +23,7 @@ export class UserService {
   // tslint:disable-next-line:typedef
   createUser(login: string, password: string, numero: string, nom: string, role: string) {
     // @ts-ignore
-    const postData: Personnel = {login, password, numero, nom, role};
+    const postData: User = {login, password, numero, nom, role};
     this.http.post(
       this.BASE_URI, postData,
       {

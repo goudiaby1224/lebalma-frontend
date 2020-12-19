@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {Personnel} from './personnel.model';
-import {User} from '../user/user.model';
 import {map, tap} from 'rxjs/operators';
 
 @Injectable({
