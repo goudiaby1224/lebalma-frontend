@@ -4,25 +4,25 @@ import { DefaultComponent } from './default.component';
 
 import { RouterModule } from '@angular/router';
 import { DashbordComponent } from 'src/app/pages/dashbord/dashbord.component';
-import { PostsComponent } from 'src/app/pages/posts/posts.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import {  MatDividerModule } from '@angular/material/divider';
-
+import { UserComponent } from 'src/app/user/user.component';
+import {MaterialModule } from  'src/app/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashbordComponent,
-    PostsComponent
+    UserComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    MatSidenavModule,
-    MatDividerModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 
 })
