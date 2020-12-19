@@ -9,6 +9,7 @@ import { AdresseComponent } from './adresse/adresse.component';
 import { PersonnelComponent } from './personnel/personnel.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import {FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {FormsModule} from '@angular/forms';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -21,7 +21,7 @@ export class PersonnelService {
   }
 
   // tslint:disable-next-line:typedef
-  createUser(nom: string, prenom: string, adresse: string, metier: string, service: string, mail: string, tel: string, role: string) {
+  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string, mail: string, tel: string, role: string) {
     // @ts-ignore
     const postData: Personnel = {nom, prenom, adresse, service, nomUtilisateur, mail, tel: role};
     this.http.post(
@@ -41,12 +41,12 @@ export class PersonnelService {
   }
 
   // tslint:disable-next-line:typedef
-  fetchUser(id: string) {
-    this.http.get<{ [key: string]: User }>(this.BASE_URI + '/' + id)
+  fetchPersonnel(id: string) {
+    this.http.get<{ [key: string]: Personnel }>(this.BASE_URI + '/' + id)
       .pipe(
         map(responseDataResponse => {
           console.log(responseDataResponse);
-          const postArray: User[] = [];
+          const postArray: Personnel[] = [];
           for (const key in responseDataResponse) {
             if (responseDataResponse.hasOwnProperty(key)) {
               // postArray.push(responseDataResponse[key], id: key );
