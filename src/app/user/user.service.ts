@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
 })
 export class UserService {
 
-  BASE_URI = 'http://localhost:8881/lebalma/users';
+  BASE_URI = 'http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/users/';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) {

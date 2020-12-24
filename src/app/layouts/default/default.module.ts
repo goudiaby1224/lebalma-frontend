@@ -9,7 +9,6 @@ import { UserComponent } from 'src/app/user/user.component';
 import {MaterialModule } from  'src/app/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/user/user.service';
-import {DataTableComponent } from 'src/app/data-table/data-table.component';
 import {TableModule} from 'primeng/table';
 import { PartenaireComponent } from 'src/app/partenaire/partenaire.component';
 import { PersonnelComponent } from 'src/app/personnel/personnel.component';
@@ -26,7 +25,6 @@ import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.servic
     DefaultComponent,
     DashbordComponent,
     UserComponent,
-    DataTableComponent,
     PartenaireComponent,
     PersonnelComponent,
     ServiceOumouComponent,

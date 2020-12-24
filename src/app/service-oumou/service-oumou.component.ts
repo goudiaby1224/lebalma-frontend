@@ -21,10 +21,6 @@ export class ServiceOumouComponent implements OnInit {
   responsable:string='';  
 
 
- 
-  
-
-  
   constructor(private fb: FormBuilder,public readonly service: ServiceOumouService) {
 
     this.regiForm = fb.group({  

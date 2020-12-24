@@ -10,7 +10,7 @@ import { EmployePartenaire } from "./EmployePartenaire.model";
   })
 export class EmployePartenaireService{
 
-    BASE_URI = 'http://localhost:8881/lebalma/employes';
+    BASE_URI ='http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/employes/';
     error = new Subject<string>();
   
     constructor(private http: HttpClient) { }
