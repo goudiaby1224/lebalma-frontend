@@ -14,6 +14,10 @@ import {TableModule} from 'primeng/table';
 import { PartenaireComponent } from 'src/app/partenaire/partenaire.component';
 import { PersonnelComponent } from 'src/app/personnel/personnel.component';
 import { PartenaireService } from 'src/app/partenaire/partenaire.service';
+import {ServiceOumouComponent} from 'src/app/service-oumou/service-oumou.component';
+import { ServiceOumouService} from 'src/app/service-oumou/ServiceOumou.service';
+import {EmployeComponent} from 'src/app/employe/employe.component';
+import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.service';
 
 
 
@@ -24,7 +28,10 @@ import { PartenaireService } from 'src/app/partenaire/partenaire.service';
     UserComponent,
     DataTableComponent,
     PartenaireComponent,
-    PersonnelComponent
+    PersonnelComponent,
+    ServiceOumouComponent,
+    EmployeComponent
+
   ],
   imports: [
     CommonModule,
@@ -37,7 +44,9 @@ import { PartenaireService } from 'src/app/partenaire/partenaire.service';
   ],
   providers: [
     UserService,
-    PartenaireService
+    PartenaireService,
+    ServiceOumouService,
+    EmployePartenaireService
 ]
 })
 export class DefaultModule { }

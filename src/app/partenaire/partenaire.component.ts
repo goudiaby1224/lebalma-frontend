@@ -48,7 +48,7 @@ export class PartenaireComponent implements OnInit {
   }
 
   onCreatePartenaire(partenaire: Partenaire): void {
-      this.partenaireService.createAndStorePartenaire(partenaire.raisonsocial, partenaire.adresse, partenaire.telephone,partenaire.responsable, partenaire.mail,
+      this.partenaireService.createAndStorePartenaire(partenaire.raisonSocial, partenaire.adresse, partenaire.telephone,partenaire.responsable, partenaire.mail,
         partenaire.dateMiseEnService, partenaire.type);
   }
 

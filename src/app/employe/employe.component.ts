@@ -1,28 +1,26 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {HttpClient, HttpEventType} from '@angular/common/http';
-import {map, tap} from 'rxjs/operators';
-import {Personnel} from './personnel.model';
-import { Subscription } from 'rxjs';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PersonnelService } from './personnel.service';
-
-import { ServiceOumou } from '../service-oumou/ServiceOumou.model';
-import { ServiceOumouService } from '../service-oumou/ServiceOumou.service';
+import { Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Partenaire } from '../partenaire/partenaire.model';
+import { PartenaireService } from '../partenaire/partenaire.service';
+import { EmployePartenaire } from './EmployePartenaire.model';
+import { EmployePartenaireService } from './EmployePartenaire.service';
 
 @Component({
-  selector: 'app-personnel',
-  templateUrl: './personnel.component.html',
-  styleUrls: ['./personnel.component.css']
+  selector: 'app-employe',
+  templateUrl: './employe.component.html',
+  styleUrls: ['./employe.component.css']
 })
-export class PersonnelComponent implements OnInit {
-  
-  loadedPersonnel: Personnel[] = [];
-  loadedServiceOumou: ServiceOumou[] = [];
+export class EmployeComponent implements OnInit {
+
+  loadedEmploye: EmployePartenaire[] = [];
+  loadedPartenaire: Partenaire[] = [];
   isFetching = false;
   error :any;
   private errorSub!: Subscription;
-  selectedItem!: ServiceOumou;
+  selectedItem!: Partenaire;
 
   regiForm: FormGroup;  
 
@@ -30,7 +28,7 @@ export class PersonnelComponent implements OnInit {
   
 
   constructor(private http: HttpClient,private fb: FormBuilder,
-     private service: PersonnelService,private serviceOumouService: ServiceOumouService) {
+     private service: EmployePartenaireService,private partenaireService: PartenaireService) {
   
     this.regiForm = fb.group({  
       'nom' : [null, Validators.required],  
@@ -42,7 +40,7 @@ export class PersonnelComponent implements OnInit {
       'mail':[null, Validators.compose([Validators.required,Validators.email])],  
       'role':[null, Validators.required],
       'adresse':[null, Validators.required],
-      'serviceOumou':[null, Validators.required]
+      'partenaire':[null, Validators.required]
      
     });  
   }
@@ -52,30 +50,30 @@ export class PersonnelComponent implements OnInit {
       this.error = errorMessage;
     });
     this.isFetching = true;
-    this.service.fetchAllPersonnel().then(personnels => {
+    this.service.fetchAllEmployePartenaire().then(employes => {
       this.isFetching = false;
-      this.loadedPersonnel = personnels;
+      this.loadedEmploye = employes;
     },
     error => {
       this.isFetching = false;
       this.error = error.message;
     });
-    this.serviceOumouService.fetchAllServiceOumou().then(serviceOumous=>
-      {this.loadedServiceOumou=serviceOumous}
+    this.partenaireService.fetchAllPartenaire().then(partenaires=>
+      {this.loadedPartenaire=partenaires}
      )
   }
 
-  onCreatePersonnel(postData: Personnel) {
+  onCreateEmployePartenaire(postData: EmployePartenaire) {
     // Send Http request
-    this.service.createPersonnel(postData.nom, postData.prenom, postData.adresse,
+    this.service.createAndStoreEmployePartenaire(postData.nom, postData.prenom, postData.adresse,
       postData.metier, postData.service, postData.nomUtilisateur,
       postData.mail, postData.tel,postData.role,this.selectedItem)
   }
 
   
   // tslint:disable-next-line:typedef
-  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, tel: string, role: string) {
-    const postData: Personnel = {nom, prenom, adresse, metier, service, nomUtilisateur, mail, tel, role};
+  createEmployePartenaire(nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, tel: string, role: string) {
+    const postData: EmployePartenaire = {nom, prenom, adresse, metier, service, nomUtilisateur, mail, tel, role};
     this.http.post(
       this.BASE_URI, postData,
       {
@@ -93,12 +91,12 @@ export class PersonnelComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  fetchPersonnel(id: string) {
-    this.http.get<{ [key: string]: Personnel }>(this.BASE_URI + '/' + id)
+  fetchEmployePartenaire(id: string) {
+    this.http.get<{ [key: string]: EmployePartenaire }>(this.BASE_URI + '/' + id)
       .pipe(
         map(responseDataResponse => {
           console.log(responseDataResponse);
-          const postArray: Personnel[] = [];
+          const postArray: EmployePartenaire[] = [];
           for (const key in responseDataResponse) {
             if (responseDataResponse.hasOwnProperty(key)) {
               // postArray.push(responseDataResponse[key], id: key );
@@ -115,10 +113,10 @@ export class PersonnelComponent implements OnInit {
   onFetchPersonnel() {
     // Send Http request
     this.isFetching = true;
-    this.service.fetchAllPersonnel().then(
-      personnels => {
+    this.service.fetchAllEmployePartenaire().then(
+      employes => {
         this.isFetching = false;
-        this.loadedPersonnel = personnels;
+        this.loadedEmploye = employes;
       },
       error => {
         this.isFetching = false;
@@ -129,7 +127,7 @@ export class PersonnelComponent implements OnInit {
   }
   
   // tslint:disable-next-line:typedef
-  deletePersonnel(id: string) {
+  deleteEmployePartenaire(id: string) {
     return this.http.delete(this.BASE_URI + '/' + id, {
       observe: 'events',
       responseType: 'text'
@@ -145,15 +143,15 @@ export class PersonnelComponent implements OnInit {
         }
       ));
   }
-  onRowEditInit(personnel: Personnel) {
-    console.log(personnel);
+  onRowEditInit(employe: EmployePartenaire) {
+    console.log(employe);
   }
   
-  onRowEditSave(personnel: Personnel) {
-    this.service.updatePersonnel(personnel);
+  onRowEditSave(employe: EmployePartenaire) {
+    this.service.updateEmployePartenaire(employe);
   }
   
-  onRowEditCancel(personnel: Personnel, index: number) {
+  onRowEditCancel(employe: EmployePartenaire, index: number) {
     console.log('Row edit cancelled');
   }
   
@@ -162,4 +160,5 @@ export class PersonnelComponent implements OnInit {
     this.error = null;
   }
   
+
 }

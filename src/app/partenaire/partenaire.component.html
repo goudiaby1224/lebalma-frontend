@@ -116,7 +116,10 @@
 
 
 
-    <p-table [value]="loadedPartenaire" dataKey="id" editMode="row" sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" class="timecard">
+    <p-table [value]="loadedPartenaire" dataKey="id" editMode="row" 
+    sortMode="multiple" selectionMode="multiple" [paginator]="true" 
+    [responsive]="true"  [rows]="20" [resizableColumns]="true" 
+          columnResizeMode="expand" >
         <ng-template pTemplate="header">
             <tr>
                 <th>Identifiant</th>
@@ -125,7 +128,7 @@
                 <th>Telephone</th>
                 <th>Responsable</th>
                 <th>Email</th>
-                <th>Date Mise En Service</th>
+                <th>Mise En Service</th>
 				<th>Type</th>
 			
             </tr>
@@ -138,10 +141,10 @@
                 <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="partenaire.raisonsocial">
+                            <input pInputText type="text" [(ngModel)]="partenaire.raisonSocial">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{partenaire.raisonsocial}}
+                            {{partenaire.raisonSocial}}
                         </ng-template>
                     </p-cellEditor>
                 </td>

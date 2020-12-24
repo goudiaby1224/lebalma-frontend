@@ -1,26 +1,15 @@
-<!-- 
- public id?: number;
-  public nom: string;
-  public prenom: string;
-  public adresse: string;
-  public metier: string;
-  public service: string;
-  public nomUtilisateur: string;
-  public mail: string;
-  public tel: string;
-  public role: string;
-  -->
+
   
   
   <mat-card>  
     <!-- Title of an Card -->  
     <mat-card-title style="text-align: center;">  
-      Enregistrer un Personnel
+      Enregistrer un employe Partenaire
     </mat-card-title>  
     <mat-divider> </mat-divider>
     <!-- Actual content starts from here -->  
     <mat-card-content class="profile-card" style="text-align: center;" >  
-        <form [formGroup]="regiForm" (ngSubmit)="onCreatePersonnel(regiForm.value)" style="display: inline-block;" >  
+        <form [formGroup]="regiForm" (ngSubmit)="onCreateEmployePartenaire(regiForm.value)" style="display: inline-block;" >  
             <table>  
                 <tr>  
                     <td>  
@@ -123,13 +112,13 @@
                 <tr>  
                     <td><br>  
                         <mat-form-field>  
-                            <mat-select formControlName="serviceOumou" placeholder="Choisir un service" [(ngModel)]="selectedItem">  
-                                <mat-option *ngFor="let serviceOumou of loadedServiceOumou" [value]="serviceOumou">
-                                    {{serviceOumou.nom}}
+                            <mat-select formControlName="partenaire" placeholder="Choisir un partenaire" [(ngModel)]="selectedItem">  
+                                <mat-option *ngFor="let partenaire of loadedPartenaire" [value]="partenaire">
+                                    {{partenaire.raisonSocial}}
                                   </mat-option>
                             </mat-select>  
                             <mat-error>  
-                                <span *ngIf="!regiForm.get('serviceOumou').valid && regiForm.get('serviceOumou').touched">SVP choisir un service !!!</span>  
+                                <span *ngIf="!regiForm.get('partenaire').valid && regiForm.get('partenaire').touched">SVP choisir un partenaire !!!</span>  
                             </mat-error>  
                         </mat-form-field>  
 
@@ -154,7 +143,7 @@
     <mat-divider> </mat-divider>
  
     <mat-card-content class="profile-card" style="padding-top: 50px;" > 
-        <p-table [value]="loadedPersonnel" dataKey="id" editMode="row"
+        <p-table [value]="loadedEmploye" dataKey="id" editMode="row"
          sortMode="multiple" selectionMode="multiple" [paginator]="true"
           [responsive]="true"  [rows]="20" [resizableColumns]="true" 
           columnResizeMode="expand" 
@@ -174,110 +163,110 @@
                 
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-personnel let-editing="editing" let-ri="rowIndex">
-                <tr [pEditableRow]="personnel" style="background-color: aqua;">
+            <ng-template pTemplate="body" let-employe let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="employe" style="background-color: aqua;">
                     <td>
-                        {{personnel.id}}
+                        {{employe.id}}
                     </td>
                     <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.nom">
+                                <input pInputText type="text" [(ngModel)]="employe.nom">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.nom}}
+                                {{employe.nom}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                     <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.prenom">
+                                <input pInputText type="text" [(ngModel)]="employe.prenom">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.prenom}}
+                                {{employe.prenom}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                       <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.adresse">
+                                <input pInputText type="text" [(ngModel)]="employe.adresse">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.adresse}}
+                                {{employe.adresse}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                     <td>
                       <p-cellEditor>
                           <ng-template pTemplate="input">
-                              <input pInputText type="text" [(ngModel)]="personnel.metier">
+                              <input pInputText type="text" [(ngModel)]="employe.metier">
                           </ng-template>
                           <ng-template pTemplate="output">
-                              {{personnel.metier}}
+                              {{employe.metier}}
                           </ng-template>
                       </p-cellEditor>
                   </td>
                       <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.service">
+                                <input pInputText type="text" [(ngModel)]="employe.service">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.service}}
+                                {{employe.service}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                       <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.nomUtilisateur">
+                                <input pInputText type="text" [(ngModel)]="employe.nomUtilisateur">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.nomUtilisateur}}
+                                {{employe.nomUtilisateur}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                        <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.mail">
+                                <input pInputText type="text" [(ngModel)]="employe.mail">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.mail}}
+                                {{employe.mail}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                      <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.tel">
+                                <input pInputText type="text" [(ngModel)]="employe.tel">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.tel}}
+                                {{employe.tel}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                      <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="personnel.role">
+                                <input pInputText type="text" [(ngModel)]="employe.role">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{personnel.role}}
+                                {{employe.role}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
                     <td >
                         <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
-                            class="ui-button-info" (click)="onRowEditInit(personnel)" >Edit</button>
+                            class="ui-button-info" (click)="onRowEditInit(employe)" >Edit</button>
     
                         <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
-                            class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(personnel)">Save</button>
+                            class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(employe)">Save</button>
                             
                         <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
-                            class="ui-button-danger" (click)="onRowEditCancel(personnel, ri)">Cancel</button>
+                            class="ui-button-danger" (click)="onRowEditCancel(employe, ri)">Cancel</button>
                     </td>
                 </tr>
             </ng-template>

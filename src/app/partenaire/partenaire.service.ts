@@ -14,8 +14,8 @@ export class PartenaireService {
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line:typedef
-  createAndStorePartenaire(raisonsocial: string, adresse: string, telephone: string,responsable: string, mail: string, dateMiseEnService: string, type: string){
-    const postData: Partenaire = { raisonsocial, adresse, telephone,responsable, mail, dateMiseEnService, type};
+  createAndStorePartenaire(raisonSocial: string, adresse: string, telephone: string,responsable: string, mail: string, dateMiseEnService: string, type: string){
+    const postData: Partenaire = { raisonSocial, adresse, telephone,responsable, mail, dateMiseEnService, type};
     this.http.post(
       this.BASE_URI, postData,
       {

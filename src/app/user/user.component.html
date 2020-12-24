@@ -103,7 +103,11 @@
 
 
 <mat-card-content class="profile-card" > 
-    <p-table [value]="loadedUsers" dataKey="id" editMode="row" sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" class="content-table">
+    <p-table [value]="loadedUsers" dataKey="id" editMode="row"
+     sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" 
+     [responsive]="true"   [resizableColumns]="true" 
+          columnResizeMode="expand" 
+     >
         <ng-template pTemplate="header">
             <tr>
                 <th>id</th>

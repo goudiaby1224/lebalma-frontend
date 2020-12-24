@@ -1,8 +1,8 @@
 import { Partenaire } from "../partenaire/partenaire.model";
-import { ServiceOumou } from "../service-oumou/ServiceOumou.model";
 
-export class Personnel {
-  public id?: number;
+export class EmployePartenaire{
+
+    public id?: number;
   public nom: string;
   public prenom: string;
   public adresse: string;
@@ -12,10 +12,10 @@ export class Personnel {
   public mail: string;
   public tel: string;
   public role: string;
-  public serviceOumou?: ServiceOumou;
+  public partenaire?: Partenaire;
 
   constructor(id: number, nom: string, prenom: string, adresse: string, metier: string, service: string,
-     nomUtilisateur: string, mail: string, tel: string, role: string, serviceOumou:ServiceOumou) {
+     nomUtilisateur: string, mail: string, tel: string, role: string, partenaire:Partenaire) {
     this.id = id;
     this.nom = nom;
     this.prenom = prenom;
@@ -26,6 +26,6 @@ export class Personnel {
     this.mail = mail;
     this.tel = tel;
     this.role = role;
-    this.serviceOumou= serviceOumou
+    this.partenaire= partenaire
   }
 }

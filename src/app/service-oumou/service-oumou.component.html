@@ -1,0 +1,102 @@
+<mat-card>  
+    <!-- Title of an Card -->  
+    <mat-card-title style="text-align: center;">  
+      Ajout d'un Service
+    </mat-card-title>  
+  
+    <!-- Actual content starts from here -->  
+    <mat-card-content class="profile-card" style="text-align: center;" >  
+        <form [formGroup]="regiForm" (ngSubmit)="onCreateUser(regiForm.value)" style="display: inline-block;" >  
+            <table>  
+                <tr>  
+                    <td>  
+                        <mat-form-field class="demo-full-width">  
+                            <input formControlName="nom" matInput placeholder="nom">  
+                        </mat-form-field>  
+                        <mat-error>  
+                            <span *ngIf="!regiForm.get('nom').valid && regiForm.get('nom').touched">SVP saisir le nom !!!</span>  
+                        </mat-error>  
+                    </td>  
+                </tr>  
+                <tr> 
+                  <td>  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="responsable" matInput placeholder="Responsable">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!regiForm.get('responsable').valid && regiForm.get('responsable').touched">SVP saisir le responsable!!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>              
+                <tr>  
+                    <td colspan="2" class="content-center">  
+                        <button mat-raised-button color="success" [disabled]="!regiForm.valid">Creer</button>  
+                    </td>  
+                   
+                </tr>  
+                <tr>  
+                    <td></td>  
+                </tr>  
+            </table>  
+        </form>  
+         
+    </mat-card-content>  
+  </mat-card>  
+  
+  <mat-divider> </mat-divider>
+  
+  
+  
+  <mat-card-content class="profile-card" > 
+      <p-table [value]="loadedService" dataKey="id" editMode="row"
+       sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" 
+       [responsive]="true"   [resizableColumns]="true" 
+            columnResizeMode="expand" 
+       >
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>id</th>
+                  <th>nom</th>
+                  <th>Responsable</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-serviceOumou let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="serviceOumou">
+                  <td>
+                      {{serviceOumou.id}}
+                  </td>
+                  <td>
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input pInputText type="text" [(ngModel)]="serviceOumou.nom">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{serviceOumou.nom}}
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                  <td>
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input pInputText type="text" [(ngModel)]="serviceOumou.responsable">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{serviceOumou.responsable}}
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                   
+                  <td >
+                      <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                          class="ui-button-info" (click)="onRowEditInit(serviceOumou)">Edit</button>
+  
+                      <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                          class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(serviceOumou)">Save</button>
+                          
+                      <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                          class="ui-button-danger" (click)="onRowEditCancel(serviceOumou, ri)">Cancel</button>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </mat-card-content>

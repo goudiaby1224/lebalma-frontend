@@ -3,12 +3,13 @@ import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {Personnel} from './personnel.model';
 import {map, tap} from 'rxjs/operators';
+import { ServiceOumou } from '../service-oumou/ServiceOumou.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonnelService {
-  BASE_URI = 'http://localhost:8881/lebalma/personnel';
+  BASE_URI = 'http://localhost:8881/lebalma/utilisateurs';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) {
@@ -22,9 +23,11 @@ export class PersonnelService {
   // tslint:disable-next-line:typedef
  
 
-  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string,nomUtilisateur: string, mail: string, tel: string, role: string) {
+  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string,
+    nomUtilisateur: string, mail: string, tel: string, role: string,
+    serviceOumou:ServiceOumou) {
     // @ts-ignore
-    const postData: Personnel = {nom, prenom, adresse,metier, service, nomUtilisateur, mail, tel, role};
+    const postData: Personnel = {nom, prenom, adresse,metier, service, nomUtilisateur, mail, tel, role,serviceOumou};
     this.http.post(
       this.BASE_URI, postData,
       {
