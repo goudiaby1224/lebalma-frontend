@@ -8,7 +8,7 @@ import {map, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PersonnelService {
-  BASE_URI = 'http://localhost:8881/lebalma/partenaire/';
+  BASE_URI = 'http://localhost:8881/lebalma/personnel';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) {
@@ -20,9 +20,11 @@ export class PersonnelService {
   }
 
   // tslint:disable-next-line:typedef
-  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string, mail: string, tel: string, role: string) {
+ 
+
+  createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string,nomUtilisateur: string, mail: string, tel: string, role: string) {
     // @ts-ignore
-    const postData: Personnel = {nom, prenom, adresse, service, nomUtilisateur, mail, tel: role};
+    const postData: Personnel = {nom, prenom, adresse,metier, service, nomUtilisateur, mail, tel, role};
     this.http.post(
       this.BASE_URI, postData,
       {
@@ -38,7 +40,7 @@ export class PersonnelService {
         }
       );
   }
-
+ 
   // tslint:disable-next-line:typedef
   fetchPersonnel(id: string) {
     this.http.get<{ [key: string]: Personnel }>(this.BASE_URI + '/' + id)
@@ -77,4 +79,13 @@ export class PersonnelService {
         }
       ));
   }
+
+  updatePersonnel(personnel: Personnel) {
+    this.http.put<Personnel>(this.BASE_URI,personnel).subscribe(resp=>{console.log(resp)})
+  }
+  
+  fetchAllPersonnel() {
+    return this.http.get<Personnel[]>(this.BASE_URI ).toPromise() ;
+  }
+
 }

@@ -1,0 +1,16 @@
+.p-datatable table {
+	background-color: #f79646;
+}
+.p-datatable-tbody>tr>td{
+    background-color: #f79646;
+}
+
+.p-datatable-tbody{
+    background-color: #f79646;
+}
+ /*.p-datatable-tbody>tr>td, 
+ .p-datatable-resizable
+  .p-datatable-tfoot>tr>td,
+   .p-datatable-resizable 
+   .p-datatable-thead>tr>th 
+  */

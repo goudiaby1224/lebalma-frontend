@@ -14,8 +14,8 @@ export class PartenaireService {
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line:typedef
-  createAndStorePartenaire(raisonsocial: string, adresse: string, telephone: string, mail: string, dateMiseEnService: string, type: string){
-    const postData: Partenaire = { raisonsocial, adresse, telephone, mail, dateMiseEnService, type};
+  createAndStorePartenaire(raisonsocial: string, adresse: string, telephone: string,responsable: string, mail: string, dateMiseEnService: string, type: string){
+    const postData: Partenaire = { raisonsocial, adresse, telephone,responsable, mail, dateMiseEnService, type};
     this.http.post(
       this.BASE_URI, postData,
       {
@@ -69,5 +69,11 @@ export class PartenaireService {
         }
       }
     ));
+  }
+  fetchAllPartenaire() {
+    return this.http.get<Partenaire[]>(this.BASE_URI ).toPromise() ;
+  }
+  updatePartenaire(partenaire: Partenaire) {
+    this.http.put<Partenaire>(this.BASE_URI,partenaire).subscribe(resp=>{console.log(resp)})
   }
 }

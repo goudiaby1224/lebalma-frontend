@@ -1,5 +1,5 @@
 export class User {
-  public id: number;
+  public id?: number;
   public login: string;
   public password: string;
   public numero: number;
@@ -14,4 +14,5 @@ export class User {
     this.nom = role;
     this.role = nom;
   }
+  
 }

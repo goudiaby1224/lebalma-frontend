@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { User } from './user.model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {UserService} from './user.service';
+import {User} from './user.model';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-user',
@@ -9,58 +12,116 @@ import { User } from './user.model';
 })
 export class UserComponent implements OnInit {
   
-  userForm: FormGroup;
+  loadedUsers: User[] = [];
+  isFetching = false;
+  error :any;
+  private errorSub!: Subscription;
+
+  regiForm: FormGroup;  
+  login:string='';  
+  password:string='';  
+  numero:string='';  
+  nom:string=''; 
+  role:string='';  
+  cols:any[];
  
-  constructor(private fb: FormBuilder) {
-    this.userForm = this.fb.group(
-      {
-        usager: ['', Validators.required], nom: ['', Validators.required], password: ['', Validators.required],
-          numero: [0], option: ['', Validators.required]
-      }
+  
 
-  );
+  
+  constructor(private fb: FormBuilder,public readonly service: UserService) {
 
+    this.regiForm = fb.group({  
+      'login' : [null, Validators.required],  
+      'password' : [null, Validators.required],  
+      'numero' : [null, Validators.required],  
+      'nom':[null, Validators.required],
+      'role':[null, Validators.required]
+      //'Blog':[null, Validators.required],  
+      //'Email':[null, Validators.compose([Validators.required,Validators.email])],  
+     // 'IsAccepted':[null]  
+    });  
+    this.cols = [
+      { field: 'id', header: 'id' },
+      { field: 'login', header: 'login' },
+      { field: 'password', header: 'password' },
+      { field: 'numero', header: 'numero' },
+      { field: 'nom', header: 'nom' },
+      { field: 'role', header: 'role' }
+    ];
    }
    
   ngOnInit(): void {
+    this.errorSub = this.service.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+    this.isFetching = true;
+    this.service.fetchAllUser().then(users => {
+      this.isFetching = false;
+      this.loadedUsers = users;
+    },
+    error => {
+      this.isFetching = false;
+      this.error = error.message;
+    });
   }
 
-  roles: any[] = [
-    { name: 'SOUS-ADMIN' },
-    { name: 'AGENT' },
-    { name: 'ADMIN' },
-    
-];
-
-enregistrerItem() {
- 
- /* this.item = new ItemTypeType();
-  this.item.id = this.itemTypeForm.controls['id'].value;
-  this.item.nom = this.itemTypeForm.controls['nom'].value;
-  this.item.statut = this.itemTypeForm.controls['etat'].value;
-  this.item.delaiDeRetention = Number(this.itemTypeForm.controls['delaiRention'].value);
-  this.item.delaiNouvelItem = Number(this.itemTypeForm.controls['delaiNouvelItem'].value);
-  this.item.titre = this.itemTypeForm.controls['titre'].value;
-  this.item.description = this.itemTypeForm.controls['description'].value;
-  this.item.champA = this.itemTypeForm.controls['champ0'].value;
-  this.item.champB = this.itemTypeForm.controls['champ1'].value;
  
 
-  this.item.enabled = this.isEnabled(this.etatSelected);
-  this.item.itemCleGenerateur = this.itemTypeForm.controls['cleUnique'].value;
 
-  this.entite = new ViewModel<ItemType>(this.item);
-  this.entite.isNew = true;
-  this.entite.changes = this.entite.value;
-  if (this.editItem !== undefined) {
-      this.editItem.changes = this.item;
-      this.editItem.changes.idAuto = this.editItem.value.idAuto;
-      return this.service.save(this.editItem, this.itemTypeForm.value);
-
-  }
-
-  return this.service.save(this.entite, this.itemTypeForm.value);*/
-
+onCreateUser(postData: User) {
+  // Send Http request
+  this.service.createUser(postData.login, postData.password, postData.numero.toString(), postData.nom, postData.role);
 }
-  
+
+onFetchUsers() {
+  // Send Http request
+  this.isFetching = true;
+  this.service.fetchAllUser().then(
+    users => {
+      this.isFetching = false;
+      this.loadedUsers = users;
+    },
+    error => {
+      this.isFetching = false;
+      this.error = error.message;
+      console.log(error);
+    }
+  );
+}
+
+
+onRowEditInit(user: User) {
+  console.log(user);
+}
+
+onRowEditSave(user: User) {
+  this.service.updateUser(user);
+}
+
+onRowEditCancel(user: User, index: number) {
+  console.log('Row edit cancelled');
+}
+
+
+onHandleError() {
+  this.error = null;
+}
+
+/*onChange(event:any)  
+{  
+  if (event.checked == true) {  
+    this.IsAccepted = 1;  
+  } else {  
+    this.IsAccepted = 0;  
+  }  
+}  
+*/
+// Executed When Form Is Submitted  
+onFormSubmit(form:NgForm)  
+{  
+  console.log(form);  
+}  
+
+
+
 }

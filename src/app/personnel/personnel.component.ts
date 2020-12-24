@@ -3,6 +3,9 @@ import {Subject} from 'rxjs';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {Personnel} from './personnel.model';
+import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PersonnelService } from './personnel.service';
 
 @Component({
   selector: 'app-personnel',
@@ -10,17 +13,56 @@ import {Personnel} from './personnel.model';
   styleUrls: ['./personnel.component.css']
 })
 export class PersonnelComponent implements OnInit {
+  
+  loadedPersonnel: Personnel[] = [];
+  isFetching = false;
+  error :any;
+  private errorSub!: Subscription;
+
+  regiForm: FormGroup;  
 
   BASE_URI = 'http://localhost:8881/lebalma/personnel/';
-  error = new Subject<string>();
+  
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private fb: FormBuilder, private service: PersonnelService) {
+  
+    this.regiForm = fb.group({  
+      'nom' : [null, Validators.required],  
+      'prenom' : [null, Validators.required],  
+      'metier' : [null, Validators.required],  
+      'service':[null, Validators.required],
+      'nomUtilisateur':[null, Validators.required],
+      'tel':[null, Validators.required],  
+      'mail':[null, Validators.compose([Validators.required,Validators.email])],  
+      'role':[null, Validators.required],
+      'adresse':[null, Validators.required]
+     
+    });  
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.errorSub = this.service.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+    this.isFetching = true;
+    this.service.fetchAllPersonnel().then(personnels => {
+      this.isFetching = false;
+      this.loadedPersonnel = personnels;
+    },
+    error => {
+      this.isFetching = false;
+      this.error = error.message;
+    });
   }
 
+  onCreatePersonnel(postData: Personnel) {
+    // Send Http request
+    this.service.createPersonnel(postData.nom, postData.prenom, postData.adresse,
+      postData.metier, postData.service, postData.nomUtilisateur,
+      postData.mail, postData.tel,postData.role)
+  }
+
+  
   // tslint:disable-next-line:typedef
   createPersonnel(nom: string, prenom: string, adresse: string, metier: string, service: string, nomUtilisateur: string, mail: string, tel: string, role: string) {
     const postData: Personnel = {nom, prenom, adresse, metier, service, nomUtilisateur, mail, tel, role};
@@ -60,7 +102,22 @@ export class PersonnelComponent implements OnInit {
       });
   }
 
-
+  onFetchPersonnel() {
+    // Send Http request
+    this.isFetching = true;
+    this.service.fetchAllPersonnel().then(
+      personnels => {
+        this.isFetching = false;
+        this.loadedPersonnel = personnels;
+      },
+      error => {
+        this.isFetching = false;
+        this.error = error.message;
+        console.log(error);
+      }
+    );
+  }
+  
   // tslint:disable-next-line:typedef
   deletePersonnel(id: string) {
     return this.http.delete(this.BASE_URI + '/' + id, {
@@ -78,5 +135,21 @@ export class PersonnelComponent implements OnInit {
         }
       ));
   }
-
+  onRowEditInit(personnel: Personnel) {
+    console.log(personnel);
+  }
+  
+  onRowEditSave(personnel: Personnel) {
+    this.service.updatePersonnel(personnel);
+  }
+  
+  onRowEditCancel(personnel: Personnel, index: number) {
+    console.log('Row edit cancelled');
+  }
+  
+  
+  onHandleError() {
+    this.error = null;
+  }
+  
 }

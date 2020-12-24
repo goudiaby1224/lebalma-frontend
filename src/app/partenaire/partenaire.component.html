@@ -1,113 +1,221 @@
-<p>partenaire works!</p>
-<div class="container">
-<div class="row">
-  <div class="col-xs-12">
-    <form #postForm="ngForm" (ngSubmit)="onCreate(postForm.value)">
-      <div class="row">
-        <div class="col-sm-5 form-group">
-          <label for="raisonSocial">Raison Social</label>
-          <input
-            type="text"
-            class="form-control"
-            id="raisonSocial"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="adresse">Adresse</label>
-          <input
-            type="text"
-            class="form-control"
-            id="adresse"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="telephone">Telephone</label>
-          <input
-            type="text"
-            class="form-control"
-            id="telephone"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="responsable">Responsable</label>
-          <input
-            type="number"
-            id="responsable"
-            class="form-control"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="mail">Mail</label>
-          <input
-            type="number"
-            id="mail"
-            class="form-control"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="dateMisenEnService">Date de mise en service</label>
-          <input
-            type="number"
-            id="dateMisenEnService"
-            class="form-control"
-            required
-            ngModel>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="type">Type</label>
-          <input
-            type="number"
-            id="type"
-            class="form-control"
-            required
-            ngModel>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-danger" type="button">Delete</button>
-          <button class="btn btn-primary" type="button">Clear</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-<hr />
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <button class="btn btn-primary" (click)="onFetchPartenaire()">
-        Fetch Posts
-      </button>
-      |
-      <button
-        class="btn btn-danger"
-        [disabled]="loadedPartenaire.length < 1"
-      >
-        Clear Posts
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <p *ngIf="loadedPartenaire.length < 1 && !isFetching">No posts available!</p>
-      <ul class="list-group" *ngIf="loadedPartenaire.length >= 1 && !isFetching">
-        <li class="list-group-item" *ngFor="let partenaire of loadedPartenaire">
-          <h3>{{ partenaire.raisonsocial }}</h3>
-          <p>{{ partenaire.adresse }}</p>
-        </li>
-      </ul>
-      <p *ngIf="isFetching && !error">Loading...</p>
-      <div class="alert alert-danger" *ngIf="error">
-        <h1>An Error Occurred!</h1>
-        <p>{{ error }}</p>
-        <button class="btn btn-danger">Okay</button>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-card>  
+  <!-- Title of an Card -->  
+  <mat-card-title style="text-align: center;">  
+    Enregistrer un Partenaire 
+  </mat-card-title>  
+
+  <!-- Actual content starts from here -->  
+  <mat-card-content class="profile-card" style="text-align: center;" >  
+      <form [formGroup]="regiForm" (ngSubmit)="onCreatePartenaire(regiForm.value)" style="display: inline-block;" >  
+          <table>  
+              <tr>  
+                  <td>  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="raisonsocial" matInput placeholder="Raison social">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!regiForm.get('raisonsocial').valid && regiForm.get('raisonsocial').touched">SVP saisir raison social !!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+              <tr> 
+                <td>  
+                    <mat-form-field class="demo-full-width">  
+                        <input formControlName="adresse" matInput placeholder="Adresse">  
+                    </mat-form-field>  
+                    <mat-error>  
+                        <span *ngIf="!regiForm.get('adresse').valid && regiForm.get('adresse').touched">SVP saisir l'adresse!!!</span>  
+                    </mat-error>  
+                </td>  
+            </tr>  
+              <tr>
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="telephone" matInput placeholder="Telephone">  
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('telephone').valid && regiForm.get('telephone').touched">SVP saisir le  telephone!!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+              <tr>
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="responsable" matInput placeholder="Responsable">  
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('responsable').valid && regiForm.get('responsable').touched">SVP saisir le  responsable!!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+              <tr>  
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="mail" matInput placeholder="Email">  
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('mail').valid && regiForm.get('mail').touched">SVP saisir le mail !!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+			   <tr>  
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="dateMiseEnService" matInput placeholder="Mise en Service" [matDatepicker]="basicDatepicker">  
+                      <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
+                      <mat-datepicker #basicDatepicker></mat-datepicker>
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('dateMiseEnService').valid && regiForm.get('dateMiseEnService').touched">SVP saisir la date !!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+              <tr>  
+                  <td><br>  
+                      <mat-form-field>  
+                          <mat-select formControlName="type" placeholder="Choisir le type">  
+                              <mat-option>-- Choisir UN --</mat-option>  
+                              <mat-option value="EMPLOYEUR">EMPLOYEUR</mat-option>  
+                              <mat-option value="MARCHAND">MARCHAND</mat-option>  
+                              
+                          </mat-select>  
+                          <mat-error>  
+                              <span *ngIf="!regiForm.get('type').valid && regiForm.get('type').touched">SVP choisir le type !!!</span>  
+                          </mat-error>  
+                      </mat-form-field>  
+                  </td>  
+              </tr>  
+             
+              <tr>  
+                  <td colspan="2" class="content-center">  
+                      <button mat-raised-button color="success" [disabled]="!regiForm.valid">Enregistrer</button>  
+                  </td>  
+                 
+              </tr>  
+              <tr>  
+                  <td></td>  
+              </tr>  
+          </table>  
+      </form>  
+      <table>
+        <tr>
+          <td colspan="2" class="content-center">  
+            <button mat-raised-button color="success"  (click)="onFetchPartenaire()">Afficher</button>  
+        </td>  
+        <td colspan="2" class="content-center">  
+          <button mat-raised-button color="success" [disabled]="!regiForm.valid">Supprimer</button>  
+      </td>  
+        </tr>
+      </table>
+     
+  </mat-card-content>  
+</mat-card> 
+
+<mat-divider> </mat-divider>
+
+
+
+
+    <p-table [value]="loadedPartenaire" dataKey="id" editMode="row" sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" class="timecard">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Identifiant</th>
+                <th>Raison social</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Responsable</th>
+                <th>Email</th>
+                <th>Date Mise En Service</th>
+				<th>Type</th>
+			
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-partenaire let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="partenaire">
+                <td>
+                    {{partenaire.id}}
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.raisonsocial">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.raisonsocial}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.adresse">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.adresse}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.telephone">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.telephone}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input pInputText type="text" [(ngModel)]="partenaire.responsable">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{partenaire.responsable}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.mail">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.mail}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.dateMiseEnService">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.dateMiseEnService}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+				   <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="partenaire.type">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{partenaire.type}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td >
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                        class="ui-button-info" (click)="onRowEditInit(partenaire)">Edit</button>
+
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                        class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(partenaire)">Save</button>
+                        
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                        class="ui-button-danger" (click)="onRowEditCancel(partenaire, ri)">Cancel</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 

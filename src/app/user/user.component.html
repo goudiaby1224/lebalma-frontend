@@ -1,93 +1,186 @@
-<!-- Legacy form field 
+ 
 
- public id: number;
+<!-- Card container that binds all togather
+  public id?: number;
   public login: string;
   public password: string;
   public numero: number;
   public nom: string;
-  public role: string;
+  public role: string; -->  
+<mat-card>  
+  <!-- Title of an Card -->  
+  <mat-card-title style="text-align: center;">  
+    Creation Compte Admin  
+  </mat-card-title>  
 
-  <p>
-    <mat-form-field appearance="legacy">
-      <mat-label>Email Address:</mat-label>
-      <input matInput placeholder="Your email">
-      <mat-icon matSuffix>mail_outline</mat-icon>
-      <mat-hint>Input the fully qualified email address</mat-hint>
-    </mat-form-field>
-  </p>
+  <!-- Actual content starts from here -->  
+  <mat-card-content class="profile-card" style="text-align: center;" >  
+      <form [formGroup]="regiForm" (ngSubmit)="onCreateUser(regiForm.value)" style="display: inline-block;" >  
+          <table>  
+              <tr>  
+                  <td>  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="login" matInput placeholder="Login">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!regiForm.get('login').valid && regiForm.get('login').touched">SVP saisir le login !!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+              <tr> 
+                <td>  
+                    <mat-form-field class="demo-full-width">  
+                        <input formControlName="password" matInput placeholder="Mot de Passe">  
+                    </mat-form-field>  
+                    <mat-error>  
+                        <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">SVP saisir le mot de passe!!!</span>  
+                    </mat-error>  
+                </td>  
+            </tr>  
+              <tr>
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="numero" matInput placeholder="Numero">  
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('numero').valid && regiForm.get('numero').touched">SVP saisir le  numero!!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+              <tr>  
+                <td>  
+                  <mat-form-field class="demo-full-width">  
+                      <input formControlName="nom" matInput placeholder="Nom">  
+                  </mat-form-field>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('nom').valid && regiForm.get('nom').touched">SVP saisir le nom !!!</span>  
+                  </mat-error>  
+              </td>  
+              </tr>  
+              <tr>  
+                  <td><br>  
+                      <mat-form-field>  
+                          <mat-select formControlName="role" placeholder="Choisir le role">  
+                              <mat-option>-- Choisir UN --</mat-option>  
+                              <mat-option value="EMPLOYE">EMPLOYE</mat-option>  
+                              <mat-option value="SOUS_ADMIN">SOUS_ADMIN</mat-option>  
+                              <mat-option value="AGENT">AGENT</mat-option>  
+                          </mat-select>  
+                          <mat-error>  
+                              <span *ngIf="!regiForm.get('role').valid && regiForm.get('role').touched">SVP choisir le role !!!</span>  
+                          </mat-error>  
+                      </mat-form-field>  
+                  </td>  
+              </tr>  
+             
+              <tr>  
+                  <td colspan="2" class="content-center">  
+                      <button mat-raised-button color="success" [disabled]="!regiForm.valid">Creer</button>  
+                  </td>  
+                 
+              </tr>  
+              <tr>  
+                  <td></td>  
+              </tr>  
+          </table>  
+      </form>  
+      <table>
+        <tr>
+          <td colspan="2" class="content-center">  
+            <button mat-raised-button color="success"  (click)="onFetchUsers()">Afficher</button>  
+        </td>  
+        <td colspan="2" class="content-center">  
+          <button mat-raised-button color="success" [disabled]="!regiForm.valid">Supprimer</button>  
+      </td>  
+        </tr>
+      </table>
+     
+  </mat-card-content>  
+</mat-card>  
 
-    <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Phone Number:</mat-label>
-      <input matInput placeholder="Your Phone">
-      <mat-icon matSuffix>phone</mat-icon>
-      <mat-hint>Phone number with Country code</mat-hint>
-    </mat-form-field>
-  </p>
--->
-<form [formGroup]="userForm" >
-<div  class="form-container">
+<mat-divider> </mat-divider>
+<mat-card>
 
-    <p>
-        <mat-form-field appearance="legacy">
-          <mat-label>Login:</mat-label>
-          <input matInput placeholder="Login" formControlName="usager" >
-          <span *ngIf="!userForm.controls['usager'].valid && !userForm.controls['usager'].untouched"
-                        class="validation">champ
-                        obligatoire</span>
-          <mat-hint>Saisir un login unique</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput placeholder="password" formControlName="password">
-          <span *ngIf="!userForm.controls['password'].valid && !userForm.controls['password'].untouched"
-          class="validation">champ
-          obligatoire</span>
-          <mat-hint>Min 8 char 1 number and 1 alpha</mat-hint>
-        </mat-form-field>
-      </p>
-      <!-- Standard form field -->
-      <p>
-        <mat-form-field appearance="standard">
-          <mat-label>Numero:</mat-label>
-          <input matInput placeholder="Numero" formControlName="numero">
-          <mat-hint>Saisir le numero</mat-hint>
-        </mat-form-field>
-      </p>
-      <!-- Fill form field -->
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Nom:</mat-label>
-          <input matInput placeholder="Nom" formControlName="nom">
-          <span *ngIf="!userForm.controls['nom'].valid && !userForm.controls['nom'].untouched"
-          class="validation">champ
-          obligatoire</span>
-          <mat-hint>Saisir le nom</mat-hint>
-        </mat-form-field>
-      </p>
-        
-        <p>
-            <mat-form-field appearance="fill">
-              <mat-label>Role:</mat-label>
-              <mat-select formControlName="option">
-                <mat-option *ngFor="let role of roles" [value]="role.name" >
-                  {{role.name}}
-                </mat-option>
-              </mat-select>
-              <span *ngIf="!userForm.controls['option'].valid && !userForm.controls['option'].untouched"
-          class="validation">champ
-          obligatoire</span>
-              <mat-hint>choisir un role</mat-hint>
-            </mat-form-field>
-          </p>
-        <p>
-          <button mat-button type="submit" label="Enregistrer" (click)="enregistrerItem()"></button>
-        </p>
-</div>
 
-</form>
-  
-  <!-- Outline form field -->
- 
+<mat-card-content class="profile-card" > 
+    <p-table [value]="loadedUsers" dataKey="id" editMode="row" sortMode="multiple" selectionMode="multiple" [paginator]="true" [rows]="50" class="content-table">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>id</th>
+                <th>login</th>
+                <th>password</th>
+                <th>numero</th>
+                <th>nom</th>
+                <th>role</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="user">
+                <td>
+                    {{user.id}}
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="user.login">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{user.login}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="user.password">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{user.password}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="user.numero">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{user.numero}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="user.nom">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{user.nom}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                  <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="user.role">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{user.role}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td >
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                        class="ui-button-info" (click)="onRowEditInit(user)">Edit</button>
+
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                        class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(user)">Save</button>
+                        
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                        class="ui-button-danger" (click)="onRowEditCancel(user, ri)">Cancel</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</mat-card-content>
+</mat-card>

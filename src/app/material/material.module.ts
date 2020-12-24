@@ -41,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatNativeDateModule } from '@angular/material/core'
 
 const  MaterialComponents=[
   MatAutocompleteModule,
@@ -77,7 +78,8 @@ const  MaterialComponents=[
   MatTooltipModule,
   MatPaginatorModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule,
+  MatNativeDateModule
 ]
 
 
