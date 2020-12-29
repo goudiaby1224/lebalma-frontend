@@ -1,0 +1,64 @@
+ 
+
+<mat-card style="height: 100%;">  
+    <!-- Title of an Card -->  
+    <mat-card-title style="text-align: center;height: 15%;">  
+      Se connecter
+    </mat-card-title>  
+  <mat-divider></mat-divider>
+    <!-- Actual content starts from here -->  
+    <mat-card-content class="profile-card" style="text-align: center;height: 75%;" >  
+        <form [formGroup]="pwChangeForm" (ngSubmit)="onresetPwd(pwChangeForm.value)" style="display: inline-block; height: 100%;" >  
+            <table style="height: 100%;">  
+                <tr> 
+                  <td colspan="6">  
+                      <mat-form-field class="demo-full-width">  
+                          <input type="password" formControlName="currentPW" matInput placeholder="Mot de Passe courant">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!pwChangeForm.get('currentPW').valid && pwChangeForm.get('currentPW').touched">SVP saisir le mot de passe!!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+              <tr> 
+                <td colspan="6">  
+                    <mat-form-field class="demo-full-width">  
+                        <input type="password" formControlName="newPW" matInput placeholder="Nouveau Mot de Passe courant">  
+                    </mat-form-field>  
+                    <mat-error>  
+                        <div *ngIf="newPW.touched && newPW.errors.newIsNotOld">
+                            New password can't be the same as current password.
+                        </div>
+                        <span *ngIf="!pwChangeForm.get('newPW').valid && pwChangeForm.get('newPW').touched">SVP saisir le nouveau mot de passe!!!</span>  
+                    </mat-error>  
+                </td>  
+            </tr>  
+            <tr> 
+                <td colspan="6">  
+                    <mat-form-field class="demo-full-width">  
+                        <input type="password" formControlName="confirmPW" matInput placeholder="Confirmez nouveau mot de passe">  
+                    </mat-form-field>  
+                    <mat-error>  
+                        <div *ngIf="confirmPW.touched && confirmPW.errors.newMatchesConfirm">
+                            The confirmation does not match.
+                        </div>
+                        <span *ngIf="!pwChangeForm.get('confirmPW').valid && pwChangeForm.get('confirmPW').touched">SVP confirmer le nouveau mot de passe!!!</span>  
+                    </mat-error>  
+                </td>  
+            </tr>  
+              <mat-divider></mat-divider>   
+                <tr>  
+                    <td colspan="6" class="content-center">  
+                        <button mat-raised-button color="success" [disabled]="!pwChangeForm.valid">Connexion</button>  
+                    </td>  
+                </tr>  
+                <tr>  
+                    <td></td>  
+                </tr>  
+            </table>  
+        </form>  
+       
+    </mat-card-content>  
+  </mat-card>  
+  
+  

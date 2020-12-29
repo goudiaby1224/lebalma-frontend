@@ -149,7 +149,7 @@
           columnResizeMode="expand" 
            >
             <ng-template pTemplate="header">
-              <tr>
+              <tr class="datatable-header">
                     <th>Identifiant</th>
                     <th>Nom</th>
                     <th>Prenom</th>
@@ -160,11 +160,12 @@
                     <th>Email</th>
                     <th>Telephone</th>
                     <th>Role</th>
+                    <th>Action</th>
                 
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employe let-editing="editing" let-ri="rowIndex">
-                <tr [pEditableRow]="employe" style="background-color: aqua;">
+                <tr [pEditableRow]="employe">
                     <td>
                         {{employe.id}}
                     </td>

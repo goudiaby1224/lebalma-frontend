@@ -1,0 +1,52 @@
+ 
+
+<mat-card style="height: 100%;">  
+    <!-- Title of an Card -->  
+    <mat-card-title style="text-align: center;height: 15%;">  
+      Se connecter
+    </mat-card-title>  
+  <mat-divider></mat-divider>
+    <!-- Actual content starts from here -->  
+    <mat-card-content class="profile-card" style="text-align: center;height: 75%;" >  
+        <form [formGroup]="regiForm" (ngSubmit)="onConnectUser(regiForm.value)" style="display: inline-block; height: 100%;" >  
+            <table style="height: 100%;">  
+                <tr>  
+                    <td colspan="6">  
+                        <mat-form-field class="demo-full-width">  
+                            <input formControlName="login" matInput placeholder="Login">  
+                        </mat-form-field>  
+                        <mat-error>  
+                            <span *ngIf="!regiForm.get('login').valid && regiForm.get('login').touched">SVP saisir le login !!!</span>  
+                        </mat-error>  
+                    </td>  
+                </tr>  
+                <tr> 
+                  <td colspan="6">  
+                      <mat-form-field class="demo-full-width">  
+                          <input type="password" formControlName="password" matInput placeholder="Mot de Passe">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">SVP saisir le mot de passe!!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+              <mat-divider></mat-divider>   
+                <tr>  
+                    <td colspan="3" class="content-center">  
+                        <button mat-raised-button color="success" [disabled]="!regiForm.valid">Connexion</button>  
+                    </td>  
+
+                    <td colspan="3" class="content-center">  
+                        <button mat-raised-button color="success" [disabled]="!regiForm.valid" (click)="resetPassword(regiForm.controls['login'].value )">Premiere Connexion</button>  
+                    </td>  
+                </tr>  
+                <tr>  
+                    <td></td>  
+                </tr>  
+            </table>  
+        </form>  
+       
+    </mat-card-content>  
+  </mat-card>  
+  
+  

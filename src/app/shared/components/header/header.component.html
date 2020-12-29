@@ -23,13 +23,16 @@
             </li>
             <li>
                 <button mat-button [matMenuTriggerFor]="menu">
-                    <mat-icon>person_outline</mat-icon>
+                    <mat-icon>person_outline</mat-icon>Se connecter
                 </button>
-               <mat-menu #menu="matMenu">
-                  <button mat-menu-icon>
-                      <mat-icon>exit_to_app</mat-icon>
-                      Sign Out
-                  </button>
+               <mat-menu #menu="matMenu" style="background-color:white;">
+                 
+                      <h3>Se connecter</h3>
+                      <mat-divider></mat-divider>
+                      <h5><a href="#">Services Oumou</a></h5> 
+                      <mat-divider></mat-divider>
+                      <h5><a href="#">Services partenaire</a></h5>
+                                                
                </mat-menu>
             </li>
         </ul>

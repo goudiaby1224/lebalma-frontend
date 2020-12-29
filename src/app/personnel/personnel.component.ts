@@ -26,7 +26,9 @@ export class PersonnelComponent implements OnInit {
 
   regiForm: FormGroup;  
 
-  BASE_URI = 'http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/utilisateurs/';
+  BASE_URI = 'http://localhost:8881/lebalma/utilisateurs/';
+  
+ // BASE_URI = 'http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/utilisateurs/';
   
 
   constructor(private http: HttpClient,private fb: FormBuilder,

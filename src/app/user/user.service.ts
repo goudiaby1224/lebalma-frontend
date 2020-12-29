@@ -10,7 +10,9 @@ import { throwError } from 'rxjs';
 })
 export class UserService {
 
-  BASE_URI = 'http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/users/';
+  BASE_URI = 'http://localhost:8881/lebalma/users/';
+  
+ // BASE_URI = 'http://ec2-18-223-106-114.us-east-2.compute.amazonaws.com:8881/lebalma/users/';
   error = new Subject<string>();
 
   constructor(private http: HttpClient) {
@@ -59,6 +61,12 @@ export class UserService {
       .subscribe(responseData => {
         console.log(responseData);
       });
+  }
+  
+  
+  // tslint:disable-next-line:typedef
+  fetchUserByLogin(login: string) {
+   return this.http.get<User>(this.BASE_URI + '/connexion/' + login).toPromise();
   }
 
   updateUser(user: User) {

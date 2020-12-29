@@ -17,7 +17,8 @@ import {ServiceOumouComponent} from 'src/app/service-oumou/service-oumou.compone
 import { ServiceOumouService} from 'src/app/service-oumou/ServiceOumou.service';
 import {EmployeComponent} from 'src/app/employe/employe.component';
 import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.service';
-
+import {LoginUserComponent} from 'src/app/login-user/login-user.component';
+import { PwChangeComponent } from 'src/app/pw-change/pw-change.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.servic
     PartenaireComponent,
     PersonnelComponent,
     ServiceOumouComponent,
-    EmployeComponent
+    EmployeComponent,
+    LoginUserComponent,
+    PwChangeComponent
 
   ],
   imports: [

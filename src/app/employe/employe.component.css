@@ -1,0 +1,24 @@
+
+    .datatable-header {
+      background: main-color(500);
+      background-color:orange;
+      font-size: small ;  }
+      
+      .resize-handle {
+        border-right-color: rgba(#fff,.2);
+      }
+      .datatable-header-cell {
+        color: #fff;
+      }
+    
+    .datatable-body .datatable-scroll {
+        vertical-align: top;
+      }
+    
+   td{
+    text-align: center;
+   }
+  
+  
+  
+ 
