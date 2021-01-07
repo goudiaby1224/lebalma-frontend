@@ -4,12 +4,8 @@
     height: 100%;
 }
 
-mat-drawer {
-    width: 350px;
-}
+
 mat-drawer-container{
-height: 100%;
-}
-mat-drawer-content{
-    padding: 20px;
-}
+    height: 100%;
+    }
+  

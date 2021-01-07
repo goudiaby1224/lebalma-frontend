@@ -48,8 +48,9 @@ export class LoginUserComponent implements OnInit {
     console.log(this.succes);
   })
 }
-resetPassword(usrname:String) {
- this.route.navigate(['login/pwchange/'])
+resetPassword(username:String) {
+  console.log(username);
+ this.route.navigate(['login/pwchange'], { queryParams: { user: username } });
 }
 
 }

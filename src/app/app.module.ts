@@ -11,6 +11,8 @@ import { DefaultModule } from './layouts/default/default.module';
 import { MaterialModule } from './material/material.module';
 import { UserService } from './user/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -33,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
    DefaultModule,
    MaterialModule,
    FormsModule,
-   HttpClientModule
+   HttpClientModule,
+   NgbModule
   ],
   
   providers: [

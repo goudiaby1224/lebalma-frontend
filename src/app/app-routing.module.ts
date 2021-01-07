@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeComponent } from './employe/employe.component';
+import { HomeComponent } from './home/home.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
@@ -11,8 +12,10 @@ import { ServiceOumouComponent } from './service-oumou/service-oumou.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
+  
   {path : '', component: DefaultComponent,
-children:[{path:'', component: DashbordComponent },
+children:[ {path:'', component: HomeComponent },
+  {path:'dashboard', component: DashbordComponent },
 {path:'service',component: ServiceOumouComponent},
 {path:'users', component: UserComponent},
 {path:'partenaire', component: PartenaireComponent},

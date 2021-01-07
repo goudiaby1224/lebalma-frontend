@@ -19,6 +19,8 @@ import {EmployeComponent} from 'src/app/employe/employe.component';
 import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.service';
 import {LoginUserComponent} from 'src/app/login-user/login-user.component';
 import { PwChangeComponent } from 'src/app/pw-change/pw-change.component';
+import { HomeComponent } from 'src/app/home/home.component';
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { PwChangeComponent } from 'src/app/pw-change/pw-change.component';
     ServiceOumouComponent,
     EmployeComponent,
     LoginUserComponent,
-    PwChangeComponent
+    PwChangeComponent,
+    HomeComponent
 
   ],
   imports: [
