@@ -25,18 +25,36 @@
                 <button mat-button [matMenuTriggerFor]="menu">
                     <mat-icon>person_outline</mat-icon>Se connecter
                 </button>
-               <mat-menu #menu="matMenu" style="background-color:white;">
-                 
-                      <h3>Se connecter</h3>
-                      <mat-divider></mat-divider>
-                      <h5><a href="#">Services Oumou</a></h5> 
-                      <mat-divider></mat-divider>
-                      <h5><a href="#">Services partenaire</a></h5>
+               <mat-menu #menu="matMenu" >   
+                        <ul>
+                          <li>
+                            <a href="#"><i class="fa fa-home"></i> My Account</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-user-o"></i> Profile</a>
+                          </li>
+                          <li>
+                            <a href="#" routerLink="/default-layout/calendar"><i class="fa fa-calendar"></i> Calendar</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-cogs"></i> Settings</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-sign-out"></i> Log Out</a>
+                          </li>
+                        </ul>
+                      
                                                 
-               </mat-menu>
+                    </mat-menu>
             </li>
         </ul>
       </div>
+
+
+  
+        
+      
+
 </mat-toolbar-row>
 
 
