@@ -20,7 +20,7 @@ import {EmployePartenaireService} from 'src/app/employe/EmployePartenaire.servic
 import {LoginUserComponent} from 'src/app/login-user/login-user.component';
 import { PwChangeComponent } from 'src/app/pw-change/pw-change.component';
 import { HomeComponent } from 'src/app/home/home.component';
-
+import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { HomeComponent } from 'src/app/home/home.component';
     EmployeComponent,
     LoginUserComponent,
     PwChangeComponent,
-    HomeComponent
+    HomeComponent,
+    PageNotFoundComponent
 
   ],
   imports: [

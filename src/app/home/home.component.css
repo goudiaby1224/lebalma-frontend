@@ -17,6 +17,7 @@
     background-repeat: no-repeat;
     background-position: top center;
     margin-bottom: 0;
+    
 }
 
 .particulier .image-particulier{
@@ -92,44 +93,12 @@
     background-color: rgba(225, 241, 230, 0.938);
 }
 
-.row.partenaire.margin_top_3per {
-    margin-top: 3%;
-}
-.row.partenaire.round_corner {
-    border-radius: 6px;
-}
-.row.partenaire.margin_top_3per {
-    margin-top: 3%;
-}
-.responsivegrid.round_corner {
-    border-radius: 6px;
-}
-.responsivegrid.padding_40 {
-    padding: 40px;
-}
-.responsivegrid.background_color_secondary_white {
-    background-color: #fff;
-}
-.aem-GridColumn {
-    padding: 0;
-}
-.aem-GridColumn {
-    box-sizing: border-box;
-    clear: both;
-}
-.aem-GridColumn {
-    padding: 0;
-    margin: 0;
-}
+
 
 
 
 /* test   */
-.index-intro{
 
-    width: 100%;
-    background-color: white;
-}
 
    .mc {
     background-image: url("/assets/images/carte-credit.jpg");

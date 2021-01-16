@@ -8,9 +8,9 @@
  /* height: $module * 2;*/
   justify-content: space-between;
   width: 100%;
- 
+ background-color: darkgrey;
   }
-
+  
   .copyright,
   .version {
     padding: 10px 22px;
